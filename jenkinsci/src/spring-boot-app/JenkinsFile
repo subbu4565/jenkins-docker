@@ -25,6 +25,18 @@ pipeline {
                 sh 'cd jenkinsci/src/spring-boot-app && mvn clean package'
             }
             }
+            stage('code analysis') {
+                environment {
+                    SONAR_URL = 'http://50.17.11.222:9000'
+                }
+                steps {
+                    /* groovylint-disable-next-line NestedBlockDepth */
+                    withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                        /* groovylint-disable-next-line LineLength */
+                        sh 'cd jenkinsci/src/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                    }
+                }
+            }
             stage('Build and Push Docker Image') {
               environment {
                 DOCKER_IMAGE = "subbu4565/pipeline-cicd:${BUILD_NUMBER}"
@@ -42,5 +54,5 @@ pipeline {
             }
     
           }
-    }
+        }
 }
