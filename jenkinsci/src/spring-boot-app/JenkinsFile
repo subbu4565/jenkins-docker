@@ -1,3 +1,4 @@
+/* groovylint-disable GStringExpressionWithinString */
 pipeline {
     agent {
         docker {
@@ -5,7 +6,7 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    stages { 
+    stages {
             stage('maven-test') {
                 steps {
                     sh 'mvn -version'
@@ -22,6 +23,20 @@ pipeline {
             steps {
                 sh 'ls -ltr'
                 sh 'cd jenkinsci/src/spring-boot-app && mvn clean package'
+            }
+            }
+            stage('code analysis') {
+            steps {
+                environment {
+                    SONAR_URL = 'http://54.242.118.132:9000'
+                }
+                steps {
+                    /* groovylint-disable-next-line NestedBlockDepth */
+                    withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                        /* groovylint-disable-next-line LineLength */
+                        sh 'cd jenkinsci/src/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                    }
+                }
             }
             }
     }
