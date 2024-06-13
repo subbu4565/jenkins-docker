@@ -1,0 +1,18 @@
+pipeline {
+    agent {
+        docker {
+            image 'maven:latest'
+        }
+    }
+    stages { 
+            stage('maven-test') {
+                steps {
+                    sh 'mvn -version'
+                }
+            }
+
+            stage('gitcheckout') {
+                
+            }
+    }
+}
