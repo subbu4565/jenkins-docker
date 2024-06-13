@@ -38,11 +38,6 @@ pipeline {
                 }
             }
             stage('Build and Push Docker Image') {
-              environment {
-                DOCKER_IMAGE = "subbu4565/pipeline-cicd:${BUILD_NUMBER}"
-                // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-                REGISTRY_CREDENTIALS = credentials('docker-cred')
-              }
             steps {
               script {
                   sh 'cd jenkinsci/src/spring-boot-app && docker build -t subbuimage .'
