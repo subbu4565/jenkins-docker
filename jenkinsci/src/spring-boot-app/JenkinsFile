@@ -12,9 +12,15 @@ pipeline {
             }
 
             stage('gitcheckout') {
-              steps {
+            steps {
                 git branch: 'main', url: 'https://github.com/subbu4565/jenkins-docker.git'
                 sh 'echo success'
+            }
+            }
+            stage('build and test') {
+            steps {
+                sh 'ls -ltr'
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
             }
             }
     }
