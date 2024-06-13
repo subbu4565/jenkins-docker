@@ -10,6 +10,17 @@
 
     <name>spring-boot-demo</name>
     <url></url>
+         <repositories>
+    <repository>
+        <id>central</id>
+        <name>Maven Central Repository</name>
+        <url>https://repo.maven.apache.org/maven2</url>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
