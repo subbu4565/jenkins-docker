@@ -12,8 +12,10 @@ pipeline {
             }
 
             stage('gitcheckout') {
+              steps {
                 git branch: 'main', url: 'https://github.com/subbu4565/jenkins-docker.git'
                 sh 'echo success'
+            }
             }
     }
 }
