@@ -1,6 +1,6 @@
 # You can change this base image to anything else
 # But make sure to use the correct version of Java
-FROM openjdk:23-ea-11-slim-bullseye
+FROM subbu4565/dockermvn:latest
 
 # Simply the artifact path
 ARG artifact=target/spring-boot-web.jar
