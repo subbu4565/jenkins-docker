@@ -3,7 +3,7 @@
 FROM adoptopenjdk/openjdk11:armv7l-ubuntu-jre-11.0.23_9
 
 # Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+ARG artifact=target/spring-boot-web-subbu.jar
 
 WORKDIR /opt/app
 
